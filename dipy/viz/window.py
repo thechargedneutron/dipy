@@ -654,7 +654,8 @@ def show(ren, title='DIPY', size=(300, 300),
 
 def record(ren=None, cam_pos=None, cam_focal=None, cam_view=None,
            out_path=None, path_numbering=False, n_frames=1, az_ang=10,
-           magnification=1, size=(300, 300), reset_camera=True, verbose=False):
+           magnification=1, size=(300, 300), default_border=False,
+           reset_camera=True, verbose=False):
     """ This will record a video of your scene
 
     Records a video as a series of ``.png`` files of your scene by rotating the
@@ -684,6 +685,8 @@ def record(ren=None, cam_pos=None, cam_focal=None, cam_view=None,
         How much to magnify the saved frame. Default is 1.
     size : (int, int)
         ``(width, height)`` of the window. Default is (300, 300).
+    default_border : bool
+        Default Border based on screen resolution. Default is False.
     reset_camera : bool
         If True Call ``ren.reset_camera()``. Otherwise you need to set the
          camera before calling this function.
@@ -706,6 +709,7 @@ def record(ren=None, cam_pos=None, cam_focal=None, cam_view=None,
         ren = vtk.vtkRenderer()
 
     renWin = vtk.vtkRenderWindow()
+    renWin.SetBorders(default_border)
     renWin.AddRenderer(ren)
     renWin.SetSize(size[0], size[1])
     iren = vtk.vtkRenderWindowInteractor()
