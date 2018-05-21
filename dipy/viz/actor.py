@@ -1340,7 +1340,7 @@ def point(points, colors, opacity=1., point_radius=0.1, theta=8, phi=8):
     return actor
 
 
-def sphere(centers, colors, radii=1., theta=16, phi=16, sphere_obj=None):
+def sphere(centers, colors, radii=1., theta=16, phi=16, vertices=None, faces=None):
     """ Visualize one or many spheres with different colors and radii
 
     Parameters
@@ -1381,21 +1381,22 @@ def sphere(centers, colors, radii=1., theta=16, phi=16, sphere_obj=None):
     radii_fa = numpy_support.numpy_to_vtk(radii.astype('f8'), deep=0)
     radii_fa.SetName('rad')
 
-    src = vtk.vtkSphereSource()
-    src.SetRadius(0.5)
-    src.SetThetaResolution(theta)
-    src.SetPhiResolution(phi)
-
     polyData = vtk.vtkPolyData()
-    polyData.SetPoints(pts)
-    polyData.GetPointData().AddArray(radii_fa)
-    polyData.GetPointData().SetActiveScalars('rad')
-    polyData.GetPointData().AddArray(cols)
+    if faces is None:
+        src = vtk.vtkSphereSource()
+        src.SetRadius(0.5)
+        src.SetThetaResolution(theta)
+        src.SetPhiResolution(phi)
 
-    if sphere_obj is not None:
+        polyData.SetPoints(pts)
+        polyData.GetPointData().AddArray(radii_fa)
+        polyData.GetPointData().SetActiveScalars('rad')
+        polyData.GetPointData().AddArray(cols)
+
+    else:
         for object_ in range(len(sphere_obj)):
-            ut_vtk.set_polydata_vertices(polyData, sphere_obj[object_].xyz)
-            ut_vtk.set_polydata_triangles(polyData, sphere_obj[object_].faces)
+            ut_vtk.set_polydata_vertices(polyData, vertices)
+            ut_vtk.set_polydata_triangles(polyData, faces)
 
     glyph = vtk.vtkGlyph3D()
     glyph.SetSourceConnection(src.GetOutputPort())
