@@ -1351,8 +1351,8 @@ def sphere(centers, colors, radii=1., theta=16, phi=16, vertices=None, faces=Non
     radii : float or ndarray, shape (N,)
     theta : int
     phi : int
-    sphere_obj : ndarray, shape (N,)
-        Array of dipy.core.sphere.Sphere Class objects
+    vertices : vertices array
+    faces : faces array
 
     Returns
     -------
