@@ -58,7 +58,7 @@ showm.add_timer_callback(True, 200, timer_callback)
 
 showm.start()
 
-window.record(shom.ren, size=(900, 768), out_path="viz_timers.png")
+window.record(showm.ren, size=(900, 768), out_path="viz_timers.png")
 
 """
 .. figure:: viz_ui.png
