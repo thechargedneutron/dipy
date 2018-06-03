@@ -510,7 +510,6 @@ def test_timer():
     renderer.add(sphere_actor)
 
     tb = ui.TextBlock2D()
-    renderer.add(tb.get_actor())
 
     cnt = 0
     global showm
@@ -519,16 +518,17 @@ def test_timer():
                                order_transparent=True)
 
     showm.initialize()
-    showm.render()
 
     def timer_callback(obj, event):
         global cnt, sphere_actor, showm, tb
 
         cnt += 1
-        tb.message = "Let's count up to 20 and exit :" + str(cnt)
+        tb.message = "Let's count up to 10 and exit :" + str(cnt)
         showm.render()
-        if cnt > 19:
+        if cnt > 9:
             showm.exit()
+
+    renderer.add(tb)
 
     # Run every 200 milliseconds
     showm.add_timer_callback(True, 200, timer_callback)
