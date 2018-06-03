@@ -58,11 +58,11 @@ showm.add_timer_callback(True, 200, timer_callback)
 
 showm.start()
 
-window.record(showm.ren, size=(900, 768), out_path="viz_timers.png")
+window.record(showm.ren, size=(900, 768), out_path="viz_timer.png")
 
 """
-.. figure:: viz_ui.png
+.. figure:: viz_timer.png
    :align: center
 
-   **User interface example**.
+   **Showing 100 spheres of random radii and opacity levels**.
 """
