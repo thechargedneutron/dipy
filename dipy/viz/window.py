@@ -50,9 +50,6 @@ if have_vtk:
 else:
     vtkRenderer = object
 
-if have_imread:
-    #from scipy.misc import imread
-    from imageio import imread
 
 class Renderer(vtkRenderer):
     """ Your scene class
@@ -601,11 +598,16 @@ class ShowManager(object):
     def destroy_timer(self, timer_id):
         self.iren.DestroyTimer(timer_id)
 
+	def destroy_timers(self):
+        for timer_id in self.timers:
+            self.iren.DestroyTimer(timer_id)
+
     def exit(self):
         """ Close window and terminate interactor
         """
         self.iren.GetRenderWindow().Finalize()
         self.iren.TerminateApp()
+
 
 def show(ren, title='DIPY', size=(300, 300),
          png_magnify=1, reset_camera=True, order_transparent=False):
