@@ -598,7 +598,7 @@ class ShowManager(object):
     def destroy_timer(self, timer_id):
         self.iren.DestroyTimer(timer_id)
 
-	def destroy_timers(self):
+    def destroy_timers(self):
         for timer_id in self.timers:
             self.iren.DestroyTimer(timer_id)
 
