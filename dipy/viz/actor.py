@@ -1353,7 +1353,6 @@ def sphere(centers, colors, radii=1., theta=16, phi=16, vertices=None, faces=Non
     phi : int
     vertices : vertices array
     faces : faces array
-
     Returns
     -------
     vtkActor
